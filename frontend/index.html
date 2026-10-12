@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Student Placement Management System
+    </title>
+
+    <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================================
+         LOGIN SECTION
+         ================================================= -->
+
+    <div id="loginSection">
+
+        <div class="login-box">
+
+            <h2>
+                Student Placement
+                Management System
+            </h2>
+
+            <p style="text-align:center; margin-bottom:20px;">
+                Please login to continue
+            </p>
+
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Username"
+            >
+
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+
+            <button onclick="login()">
+                Login
+            </button>
+
+
+            <p id="loginError"></p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         DASHBOARD
+         ================================================= -->
+
+    <div id="dashboard"
+         style="display:none;">
+
+
+        <!-- Header -->
+
+        <header>
+
+            <h1>
+                Student Placement Management System
+            </h1>
+
+            <p>
+                Manage student placement information
+            </p>
+
+        </header>
+
+
+
+        <main>
+
+
+            <!-- Message -->
+
+            <div id="messageBox"></div>
+
+
+
+            <!-- Logout -->
+
+            <div class="logout-container">
+
+                <button
+                    class="logout-button"
+                    onclick="logout()">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STATISTICS
+                 ================================================= -->
+
+            <section class="stats">
+
+
+                <div class="card">
+
+                    <h2 id="totalStudents">
+                        0
+                    </h2>
+
+                    <p>
+                        Total Students
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h2 id="placedStudents">
+                        0
+                    </h2>
+
+                    <p>
+                        Placed Students
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h2 id="notPlacedStudents">
+                        0
+                    </h2>
+
+                    <p>
+                        Not Placed
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ADD STUDENT
+                 ================================================= -->
+
+            <section class="student-form">
+
+                <h2>
+                    Add Student
+                </h2>
+
+
+                <form id="studentForm">
+
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Student Name"
+                        required
+                    >
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Email"
+                        required
+                    >
+
+
+                    <input
+                        type="text"
+                        id="phone"
+                        placeholder="Phone"
+                        required
+                    >
+
+
+                    <input
+                        type="text"
+                        id="branch"
+                        placeholder="Branch"
+                        required
+                    >
+
+
+                    <input
+                        type="number"
+                        id="cgpa"
+                        placeholder="CGPA"
+                        min="0"
+                        max="10"
+                        step="0.01"
+                        required
+                    >
+
+
+                    <select
+                        id="placementStatus"
+                        required>
+
+                        <option value="">
+                            Select Placement Status
+                        </option>
+
+                        <option value="Placed">
+                            Placed
+                        </option>
+
+                        <option value="Not Placed">
+                            Not Placed
+                        </option>
+
+                    </select>
+
+
+                    <button type="submit">
+                        Add Student
+                    </button>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SEARCH AND FILTERS
+                 ================================================= -->
+
+            <section class="search-section">
+
+                <h2>
+                    Search Students
+                </h2>
+
+
+                <!-- Search by name -->
+
+                <input
+                    type="text"
+                    id="searchName"
+                    placeholder="Search by name"
+                >
+
+
+                <button onclick="searchStudents()">
+                    Search
+                </button>
+
+
+
+                <!-- Status -->
+
+                <select id="statusFilter">
+
+                    <option value="">
+                        Filter by Status
+                    </option>
+
+                    <option value="Placed">
+                        Placed
+                    </option>
+
+                    <option value="Not Placed">
+                        Not Placed
+                    </option>
+
+                </select>
+
+
+                <button onclick="filterByStatus()">
+                    Filter
+                </button>
+
+
+
+                <!-- Minimum CGPA -->
+
+                <input
+                    type="number"
+                    id="minCgpa"
+                    placeholder="Minimum CGPA"
+                    min="0"
+                    max="10"
+                    step="0.01"
+                >
+
+
+                <button onclick="filterByCgpa()">
+                    CGPA Filter
+                </button>
+
+
+
+                <!-- CGPA Range -->
+
+                <input
+                    type="number"
+                    id="minCgpaRange"
+                    placeholder="Min CGPA"
+                    min="0"
+                    max="10"
+                    step="0.01"
+                >
+
+
+                <input
+                    type="number"
+                    id="maxCgpaRange"
+                    placeholder="Max CGPA"
+                    min="0"
+                    max="10"
+                    step="0.01"
+                >
+
+
+                <button onclick="filterByCgpaRange()">
+                    CGPA Range
+                </button>
+
+
+
+                <!-- Sorting -->
+
+                <button onclick="sortByCgpa()">
+                    Sort by CGPA
+                </button>
+
+
+                <button onclick="sortByBranchAndCgpa()">
+                    Sort by Branch + CGPA
+                </button>
+
+
+
+                <!-- Show All -->
+
+                <button onclick="loadStudents()">
+                    Show All
+                </button>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 STUDENT LIST
+                 ================================================= -->
+
+            <section class="student-list">
+
+                <h2>
+                    Student List
+                </h2>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Email</th>
+
+                            <th>Phone</th>
+
+                            <th>Branch</th>
+
+                            <th>CGPA</th>
+
+                            <th>Status</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="studentTableBody">
+
+                    </tbody>
+
+                </table>
+
+
+
+                <!-- Pagination -->
+
+                <div class="pagination">
+
+                    <button
+                        onclick="previousPage()">
+
+                        Previous
+
+                    </button>
+
+
+                    <span id="pageNumber">
+                        Page 1
+                    </span>
+
+
+                    <button
+                        onclick="nextPage()">
+
+                        Next
+
+                    </button>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         JAVASCRIPT
+         ================================================= -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
