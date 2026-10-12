@@ -99,3 +99,13 @@ student-placement-system
 │
 ├── pom.xml
 └── README.md
+
+
+
+## Screenshots
+
+### Dashboard
+![Student Placement Management Dashboard](screenshots/dashboard.png)
+
+### Student List, Search, Filters and Pagination
+![Student List and Search Features](screenshots/students-list.png)
