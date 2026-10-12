@@ -99,7 +99,7 @@ student-placement-system
 │
 ├── pom.xml
 └── README.md
-
+```
 
 
 ## Screenshots
